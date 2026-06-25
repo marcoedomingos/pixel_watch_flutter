@@ -1,14 +1,28 @@
-extension StringExtension on String{
-  String get capitalizeEveryFirstLetter{
-    String result = "";
-    if(split(" ").isNotEmpty){
-      split(" ").forEach((phrase) {
-        result += "${phrase[0].toUpperCase()+phrase.substring(1).toLowerCase()} ";
-      });
-    }else{
-      result += this[0].toUpperCase()+substring(1).toLowerCase();
-    }
+import 'package:flutter/material.dart';
+import 'package:smart_watch/commons/colors.dart';
+import 'package:smart_watch/commons/size/viewport_scope.dart';
 
-    return result;
+extension StringExtension on String {
+  String get capitalizeEveryFirstLetter {
+    if (isEmpty) return this;
+    return split(" ")
+        .where((phrase) => phrase.isNotEmpty)
+        .map((phrase) => "${phrase[0].toUpperCase()}${phrase.substring(1).toLowerCase()}")
+        .join(" ");
   }
+}
+
+extension WatchContextExtension on BuildContext {
+  Size get _layoutSize => ViewportScope.maybeOf(this) ?? MediaQuery.sizeOf(this);
+
+  double get width => _layoutSize.width;
+  double get height => _layoutSize.height;
+  double get devicePixelRatio => MediaQuery.of(this).devicePixelRatio;
+
+  Color get primaryBlack => AppColors.primaryBlack;
+  Color get secondaryBlack => AppColors.secondaryBlack;
+  Color get primaryGrey => AppColors.primaryGrey;
+  Color get primaryRed => AppColors.primaryRed;
+  Color get primaryWhite => AppColors.primaryWhite;
+  Color get creamWhite => AppColors.creamWhite;
 }

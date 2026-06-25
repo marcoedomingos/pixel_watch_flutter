@@ -1,40 +1,39 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:smart_watch/commons/size/size.dart';
+import 'package:smart_watch/commons/extension.dart';
 
 class Pointers {
-  final date = DateFormat("MMMd").format(DateTime.now());
+  static String getDate(DateTime time) => DateFormat("MMMd").format(time);
 
-  static fullHour(BuildContext context, {double? fontSize}){
+  static Widget fullHour(BuildContext context, DateTime time, {double? fontSize}) {
     return Text(
-      DateFormat("Hm").format(DateTime.now()),
+      DateFormat("Hm").format(time),
       style: TextStyle(
-        color: Color(0xfffffdd0),
-        fontSize: fontSize ?? width(context) * 0.2,
+        color: context.creamWhite,
+        fontSize: fontSize ?? context.width * 0.2,
         fontWeight: FontWeight.bold,
       ),
     );
   }
 
-  static hourPointer() {
-    const height = 270;
-    final hour = DateTime.now().hour.toDouble();
+  static Widget hourPointer(DateTime time) {
+    const double height = 270;
+    final hour = time.hour.toDouble();
     final angle = (-pi * (hour / -12)) * 2;
     return RotatedBox(
       quarterTurns: 2,
       child: Transform.rotate(
         angle: angle,
         child: Transform.translate(
-          offset: Offset(0, 20),
+          offset: const Offset(0, 20),
           child: Center(
             child: Container(
               height: height * 0.3,
               width: 20,
               transform: Matrix4.translationValues(0, 10, 0),
               decoration: BoxDecoration(
-                color: Color(0xfffffdd0),
+                color: const Color(0xfffffdd0),
                 borderRadius: BorderRadius.circular(32),
               ),
             ),
@@ -44,16 +43,16 @@ class Pointers {
     );
   }
 
-  static minutesPointer() {
-    const height = 270;
-    final minutes = DateTime.now().minute.toDouble();
+  static Widget minutesPointer(DateTime time) {
+    const double height = 270;
+    final minutes = time.minute.toDouble();
     final angle = (-pi * (minutes / -60)) * 2;
     return RotatedBox(
       quarterTurns: 2,
       child: Transform.rotate(
         angle: angle,
         child: Transform.translate(
-          offset: Offset(0, 20),
+          offset: const Offset(0, 20),
           child: Container(
             height: height * 0.4,
             width: 4,
@@ -68,16 +67,16 @@ class Pointers {
     );
   }
 
-  static secondsPointer() {
-    const height = 270;
-    final seconds = DateTime.now().second.toDouble();
+  static Widget secondsPointer(DateTime time) {
+    const double height = 270;
+    final seconds = time.second.toDouble();
     final angle = (-pi * (seconds / -60)) * 2;
     return RotatedBox(
       quarterTurns: 2,
       child: Transform.rotate(
         angle: angle,
         child: Transform.translate(
-          offset: Offset(0, 20),
+          offset: const Offset(0, 20),
           child: Container(
             height: height * 0.4,
             width: 2,

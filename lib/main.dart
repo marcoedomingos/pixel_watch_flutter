@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:smart_watch/features/home/presentation/pages/home_page.dart';
+import 'package:smart_watch/features/home/ui/pages/home_page.dart';
 import 'core/injection_container/injection_container.dart' as injection;
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitDown,
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'Pixel Watch',
       debugShowCheckedModeBanner: false,
       home: HomePage(),

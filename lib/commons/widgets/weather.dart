@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_watch/commons/colors.dart';
-import 'package:smart_watch/core/injection_container/injection_container.dart';
-import 'package:smart_watch/core/presentation/bloc/weather/weather_bloc.dart';
+import 'package:smart_watch/features/weather/logic/weather_bloc.dart';
 
 class WeatherWidget extends StatefulWidget {
   final double size;
@@ -14,16 +13,10 @@ class WeatherWidget extends StatefulWidget {
 }
 
 class _WeatherWidgetState extends State<WeatherWidget> {
-  final bloc = injectionInstance<WeatherBloc>();
-  double size = 50;
-
   @override
   void initState() {
     super.initState();
-    setState(() {
-      size = widget.size;
-      bloc.add(GetWeather());
-    });
+    context.read<WeatherBloc>().add(GetWeather());
   }
 
   @override
@@ -36,11 +29,10 @@ class _WeatherWidgetState extends State<WeatherWidget> {
         children: [
           Card(
             elevation: 0,
-            color: primaryBlack(),
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(80)),
-            child: Padding(
-              padding: const EdgeInsets.all(2.0),
+            color: AppColors.primaryBlack,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80)),
+            child: const Padding(
+              padding: EdgeInsets.all(2.0),
               child: CircularProgressIndicator(
                 backgroundColor: Colors.white10,
                 valueColor: AlwaysStoppedAnimation<Color>(Colors.transparent),
@@ -51,53 +43,39 @@ class _WeatherWidgetState extends State<WeatherWidget> {
             top: -2,
             child: Card(
               elevation: 0,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(80)),
-              color: primaryBlack(),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80)),
+              color: AppColors.primaryBlack,
               child: Padding(
                 padding: const EdgeInsets.all(2.0),
                 child: Icon(
                   Icons.sunny,
-                  color: Color(0xfffffdd0),
-                  size: size * 1.3,
+                  color: const Color(0xfffffdd0),
+                  size: widget.size * 1.3,
                 ),
               ),
             ),
           ),
-          BlocProvider.value(
-              value: bloc,
-              child: BlocBuilder<WeatherBloc, WeatherState>(
-                  builder: (context, state) {
-                if (state is SuccessState) {
-                  return Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Text(
-                        "${state.temperature!.round()}º",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: widget.size * 1.2,
-                        ),
-                      )
-                    ],
-                  );
-                } else {
-                  return Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Text(
-                        "--",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: widget.size * 1.2,
-                        ),
-                      )
-                    ],
-                  );
-                }
-              }))
+          BlocBuilder<WeatherBloc, WeatherState>(
+            builder: (context, state) {
+              final temperature = state.status == WeatherStatus.success
+                  ? state.weather?.temperature?.celsius?.round().toString()
+                  : "--";
+              
+              return Stack(
+                alignment: Alignment.center,
+                children: [
+                  Text(
+                    "$temperatureº",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: widget.size * 1.2,
+                    ),
+                  )
+                ],
+              );
+            },
+          )
         ],
       ),
     );
