@@ -13,7 +13,7 @@ class WatchBaseLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final watchSize = context.width * 0.72;
+    final watchSize = context.minSide * 0.72;
     
     return Scaffold(
       backgroundColor: backgroundColor ?? context.primaryBlack,

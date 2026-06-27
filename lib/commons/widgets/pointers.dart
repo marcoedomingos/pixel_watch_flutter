@@ -11,7 +11,7 @@ class Pointers {
       DateFormat("Hm").format(time),
       style: TextStyle(
         color: context.creamWhite,
-        fontSize: fontSize ?? context.width * 0.2,
+        fontSize: fontSize ?? context.minSide * 0.2,
         fontWeight: FontWeight.bold,
       ),
     );

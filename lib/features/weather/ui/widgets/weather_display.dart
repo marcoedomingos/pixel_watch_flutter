@@ -23,7 +23,7 @@ class WeatherDisplay extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Pointers.fullHour(context, time, fontSize: context.width * .05),
+        Pointers.fullHour(context, time, fontSize: context.minSide * .05),
         const SizedBox(height: 8),
         Text(
           "${weather.country}, ${weather.areaName}".capitalizeEveryFirstLetter,

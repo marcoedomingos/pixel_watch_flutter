@@ -15,14 +15,14 @@ class _SplashPageState extends State<SplashPage> {
     return Scaffold(
       body: Center(
         child: SizedBox(
-          width: context.width * .72,
-          height: context.width * .72,
+          width: context.minSide * .72,
+          height: context.minSide * .72,
           child: Stack(
             alignment: Alignment.center,
             children: [
               Container(
-                width: context.width * .72,
-                height: context.width * .72,
+                width: context.minSide * .72,
+                height: context.minSide * .72,
                 color: context.primaryBlack,
               ),
               CachedNetworkImage(

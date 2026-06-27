@@ -14,7 +14,7 @@ class BpmDisplay extends StatelessWidget {
         Text(
           bpm,
           style: TextStyle(
-            fontSize: context.width * 0.72 * 0.4,
+            fontSize: context.minSide * 0.72 * 0.4,
             color: context.primaryWhite,
           ),
         ),

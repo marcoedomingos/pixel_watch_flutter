@@ -90,5 +90,6 @@ Real-time BPM sensing utilizing the device camera.
 ## Design System
 The project utilizes **Context Extensions** for a declarative design approach:
 - `context.width` / `context.height`: Screen-relative sizing.
+- `context.minSide`: The smaller of width or height, ideal for circular watch scaling.
 - `context.primaryBlack` / `context.creamWhite`: Theme-consistent color access.
 - `WatchBaseLayout`: A standardized wrapper for circular watch UI components.

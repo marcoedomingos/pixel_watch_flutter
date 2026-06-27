@@ -15,14 +15,14 @@ class FitbitPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
-              width: context.width * .52,
+              width: context.minSide * .52,
               child: Text(
                 "FitBit menu only available in physical watch",
                 textAlign: TextAlign.center,
                 style: TextStyle(color: context.primaryWhite),
               ),
             ),
-            SizedBox(height: context.height * .02),
+            SizedBox(height: context.minSide * .02),
             const FitbitSearchCard(),
           ],
         ),

@@ -17,6 +17,10 @@ extension WatchContextExtension on BuildContext {
 
   double get width => _layoutSize.width;
   double get height => _layoutSize.height;
+
+  /// Returns the smaller of the two dimensions, useful for circular layouts.
+  double get minSide => width < height ? width : height;
+
   double get devicePixelRatio => MediaQuery.of(this).devicePixelRatio;
 
   Color get primaryBlack => AppColors.primaryBlack;

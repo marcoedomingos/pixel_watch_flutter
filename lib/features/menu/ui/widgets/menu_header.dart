@@ -25,7 +25,7 @@ class MenuHeader extends StatelessWidget {
               Pointers.getDate(time).toUpperCase(),
               style: TextStyle(
                 color: context.creamWhite,
-                fontSize: context.width * .04,
+                fontSize: context.minSide * .04,
                 fontWeight: FontWeight.bold,
               ),
             ),
