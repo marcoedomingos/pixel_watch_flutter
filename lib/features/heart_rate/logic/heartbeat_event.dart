@@ -25,4 +25,6 @@ class SetBaseSize extends HeartbeatEvent {
 
 class StartHeartBeatAnimation extends HeartbeatEvent {}
 
+class PulseHeartBeat extends HeartbeatEvent {}
+
 class AnimateHeartBeatStep extends HeartbeatEvent {}

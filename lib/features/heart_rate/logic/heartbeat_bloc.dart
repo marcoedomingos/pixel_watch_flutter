@@ -49,6 +49,7 @@ class HeartbeatBloc extends Bloc<HeartbeatEvent, HeartbeatState> {
     on<UpdateBPM>(_onUpdateBPM);
     on<SetBaseSize>(_onSetBaseSize);
     on<StartHeartBeatAnimation>(_onStartHeartBeatAnimation);
+    on<PulseHeartBeat>(_onPulseHeartBeat);
     on<AnimateHeartBeatStep>(_onAnimateHeartBeatStep);
   }
 
@@ -67,16 +68,17 @@ class HeartbeatBloc extends Bloc<HeartbeatEvent, HeartbeatState> {
 
   void _onStartHeartBeatAnimation(StartHeartBeatAnimation event, Emitter<HeartbeatState> emit) {
     _pulseTimer?.cancel();
-    _pulseTimer = Timer.periodic(const Duration(milliseconds: 1000), (timer) async {
-      if (isClosed) return;
-      
-      emit(state.copyWith(heartSize: state.baseSize / 1.2));
-      
-      await Future.delayed(const Duration(milliseconds: 100));
-      if (isClosed) return;
-      
-      emit(state.copyWith(heartSize: state.baseSize));
+    _pulseTimer = Timer.periodic(const Duration(milliseconds: 1000), (timer) {
+      if (!isClosed) add(PulseHeartBeat());
     });
+  }
+
+  Future<void> _onPulseHeartBeat(PulseHeartBeat event, Emitter<HeartbeatState> emit) async {
+    emit(state.copyWith(heartSize: state.baseSize / 1.2));
+    await Future.delayed(const Duration(milliseconds: 100));
+    if (!isClosed) {
+      emit(state.copyWith(heartSize: state.baseSize));
+    }
   }
 
   void _onAnimateHeartBeatStep(AnimateHeartBeatStep event, Emitter<HeartbeatState> emit) {
