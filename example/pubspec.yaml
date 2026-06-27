@@ -1,0 +1,20 @@
+name: smart_watch_example
+description: Example app for smart_watch package
+version: 1.0.0
+publish_to: 'none'
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  smart_watch:
+    path: ../
+  # Add other dependencies from the root pubspec if needed for the example
+  bloc: ^8.0.3
+  flutter_bloc: ^8.0.1
+  get_it: ^7.2.0
+
+flutter:
+  uses-material-design: true

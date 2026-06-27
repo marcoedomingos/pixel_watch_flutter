@@ -1,0 +1,13 @@
+name: watch_core
+description: Core and Commons for Pixel Watch Flutter
+version: 1.0.0
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  get_it: ^7.2.0
+  bloc: ^8.0.3
+  flutter_bloc: ^8.0.1
